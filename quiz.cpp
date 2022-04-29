@@ -2,7 +2,7 @@
 #include <vector>
 #include <string>
 
-// defines how below questions will be structured
+// defines how questions vector will be structured
 
 struct Question
 {
@@ -34,36 +34,58 @@ std::vector<Question> questions =
 
 int main() {
     int correctCount = 0;  // var used to return total amount correct
-    for (const auto& q: questions)
-    {
+    for (const auto& q: questions) {
         std::cout << q.question << "?\n";
         char option = 'A';
+
         // Creates A) B) C) D) up to Z) depending on the amount of options
-        for (const auto& a: q.answers)
-        {
+
+        for (const auto& a: q.answers){
             std::cout << option << ") " << a << '\n';
             option += 1;
         }
 
         // While loop will not let user proceed until a valid answer is given for every question
 
-        while(option != 'A' && option != 'B' && option != 'C' && option != 'D')
-        {
+        while (option != 'A' && option != 'B' && option != 'C' && option != 'D') {
             std::cout << "Please enter a valid option: ";
             std::cin >> option;
         }
 
-        if (option == q.correct) {
-            std::cout << "Correct!\n";
-            correctCount += 1;
-        }
-        else if (option == 'A' || option == 'B' || option == 'C' || option =='D') {
-            std::cout << "Incorrect!\n";
-        }
     }
 
-    // Displays student score in a fraction and a percentage
+    // Displays user score in a fraction and a percentage
 
     std::cout << "You got " << correctCount << " out of " << questions.size() << " correct!\n";
-    std::cout << "Score: " << (double)correctCount / questions.size() * 100 << "%\n";
+    std::cout << "Score: " << (double)correctCount / questions.size() * 100 << "%\n\n";
+
+    // Gives user the option to review incorrect questions
+
+    std::cout << "Would you like to review the questions you got wrong? (y/n): ";
+    char yesOrNo;
+    std::cin >> yesOrNo;
+
+    if (yesOrNo == 'y')
+    {
+        // Displays questions that the user got wrong
+
+        for (const auto& q: questions) {
+            char option = 'A';
+            for (const auto& a: q.answers) {
+                if (option == q.correct) {
+                    std::cout << q.question << "?\n";
+                    std::cout << option << ") " << a << '\n';
+                }
+                option += 1;
+            }
+        }
+    }
+    else if (yesOrNo == 'n') {
+        std::cout << "Thank you for playing!\n";
+    }
+    else {
+        std::cout << "Please enter a valid option: ";
+        std::cin >> yesOrNo;
+    }
+
 }

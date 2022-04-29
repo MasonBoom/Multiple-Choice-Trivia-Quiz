@@ -15,7 +15,7 @@ struct Question
 
 std::vector<Question> questions = 
 {
-    { "What is Python", {"A large snake", "a high-level general-purpose programming language", "Both A and B", "None of the above"}, 'C' },  // 1
+    { "What is Python", {"A large snake", "a high-level general-purpose programming language", "Both A and B", "None of the above"}, 'C'},  // 1
     { "How many blue stripes are on the USA flag", {"13", "0", "11", "7"}, 'B'},
     { "What is the capital of the USA", {"Washington D.C.", "New York", "Chicago", "London"}, 'A'},
     { "What is the name of the company that published the Mario Kart video game", {"SEGA", "Nintendo", "Microsoft", "Sony"}, 'B'},
@@ -52,6 +52,15 @@ int main() {
             std::cin >> option;
         }
 
+        // score increased by 1 for every right answer
+
+        if (option == q.correct) {
+            std::cout << "Correct!\n";
+            correctCount += 1;
+        } else {
+            std::cout << "Incorrect!\n";
+        }
+
     }
 
     // Displays user score in a fraction and a percentage
@@ -59,15 +68,15 @@ int main() {
     std::cout << "You got " << correctCount << " out of " << questions.size() << " correct!\n";
     std::cout << "Score: " << (double)correctCount / questions.size() * 100 << "%\n\n";
 
-    // Gives user the option to review incorrect questions
+    // Gives user the option to review incorrect questions after the quiz
 
     std::cout << "Would you like to review the questions you got wrong? (y/n): ";
     char yesOrNo;
     std::cin >> yesOrNo;
 
-    if (yesOrNo == 'y')
-    {
-        // Displays questions that the user got wrong
+    if (yesOrNo == 'y'){
+
+        // Displays questions with the correct answers
 
         for (const auto& q: questions) {
             char option = 'A';
@@ -79,11 +88,9 @@ int main() {
                 option += 1;
             }
         }
-    }
-    else if (yesOrNo == 'n') {
+    } else if (yesOrNo == 'n') {
         std::cout << "Thank you for playing!\n";
-    }
-    else {
+    } else {
         std::cout << "Please enter a valid option: ";
         std::cin >> yesOrNo;
     }

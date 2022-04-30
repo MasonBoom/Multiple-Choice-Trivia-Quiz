@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <cctype>
 
 // defines how questions vector will be structured
 
@@ -48,8 +49,22 @@ int main() {
         // While loop will not let user proceed until a valid answer is given for every question
 
         while (option != 'A' && option != 'B' && option != 'C' && option != 'D') {
-            std::cout << "Please enter a valid option: ";
-            std::cin >> option;
+            if (option == 'a' || option == 'A') {
+                option = 'A';
+            }
+            else if (option == 'b' || option == 'B') {
+                option = 'B';
+            }
+            else if (option == 'c' || option == 'C') {
+                option = 'C';
+            }
+            else if (option == 'd' || option == 'D') {
+                option = 'D';
+            }
+            else {
+                std::cout << "Please enter a valid option: ";
+                std::cin >> option;
+            }
         }
 
         // score increased by 1 for every right answer

@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <cctype>
+#include <fstream>
 
 // defines how questions vector will be structured
 
@@ -33,7 +33,16 @@ std::vector<Question> questions =
     { "What is the most popular mobile app as of 4/27/2022", {"Facebook", "Snapchat", "Instagram", "TikTok"}, 'D'}  //15
 };
 
+//writtes csv file
+
+void write_csv(int vals){
+    std::ofstream file;
+    file.open("yourfile.txt", std::ios_base::app);//std::ios_base::app
+    file << "Score: " << vals; "/15\n";; 
+}
+
 int main() {
+
     int correctCount = 0;  // var used to return total amount correct
     for (const auto& q: questions) {
         std::cout << q.question << "?\n";
@@ -80,13 +89,43 @@ int main() {
 
     // Displays user score in a fraction and a percentage
 
+    double score = (double)correctCount / questions.size() * 100;
     std::cout << "You got " << correctCount << " out of " << questions.size() << " correct!\n";
-    std::cout << "Score: " << (double)correctCount / questions.size() * 100 << "%\n\n";
+    std::cout << "Score: " << score << "%\n\n";
+
+    // Tells user if they passed or failed
+
+    if ((double)correctCount / questions.size() >= 0.6) {
+        std::cout << "You passed!\n";
+    } else {
+        std::cout << "You failed!\n";
+    }
+
+    char yesOrNo;
+
+    std::cout << "Would you like to save your score? (y/n): ";
+    std::cin >> yesOrNo;
+
+    // If user chooses to save score, it will be saved to a file
+    
+    while (yesOrNo != 'y' && yesOrNo != 'n') {
+        std::cout << "Please enter a valid option: ";
+        std::cin >> yesOrNo;
+        if (yesOrNo == 'y') {
+            write_csv(correctCount);
+        }
+        if (yesOrNo == 'n') {
+            std::cout << "Score not saved.\n";
+        }
+    }
+
+    // resets yesOrNo variable to be used again
+
+    yesOrNo = ' ';
 
     // Gives user the option to review incorrect questions after the quiz
 
-    std::cout << "Would you like to review the questions you got wrong? (y/n): ";
-    char yesOrNo;
+    std::cout << "Would you like to review the questions? (y/n): ";
     std::cin >> yesOrNo;
 
     if (yesOrNo == 'y'){

@@ -33,11 +33,11 @@ std::vector<Question> questions =
     { "What is the most popular mobile app as of 4/27/2022", {"Facebook", "Snapchat", "Instagram", "TikTok"}, 'D'}  //15
 };
 
-//writtes csv file
+//writes score in provided txt file file
 
-void write_csv(int vals){
+void write_score(int vals){
     std::ofstream file;
-    file.open("yourfile.txt", std::ios_base::app);//std::ios_base::app
+    file.open("scores.txt", std::ios_base::app);
     file << "Score: " << vals; "/15\n";; 
 }
 
@@ -112,7 +112,7 @@ int main() {
         std::cout << "Please enter a valid option: ";
         std::cin >> yesOrNo;
         if (yesOrNo == 'y') {
-            write_csv(correctCount);
+            write_score(correctCount);
         }
         if (yesOrNo == 'n') {
             std::cout << "Score not saved.\n";

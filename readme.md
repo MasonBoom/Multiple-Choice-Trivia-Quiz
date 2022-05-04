@@ -24,7 +24,7 @@ If the user guesses a correct answer, the terminal will respond with "Correct!" 
 
 After the user finishes the quiz, their score will be displayed in the terminal and the user will be asked whether or not they want to save their score.
 
-![]()
+![](https://github.com/MasonBoom/Multiple-Choice-Trivia-Quiz/blob/a99dffe95d2f7009a226f8537cdd54b058bf0f29/images/2022-05-04%20(4).png)
 
 After the user is asked if they want to save their score, they will be asked if they want to review the questions with the correct answers. If they select yes (y), they will be able to see all the questions and the correct answers. If not, the game ends.
 
